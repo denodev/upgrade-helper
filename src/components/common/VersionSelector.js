@@ -127,7 +127,7 @@ const getReleasedVersions = ({ releasedVersions, minVersion, maxVersion }) => {
   )
 }
 
-// Finds the first minor release (which in react-native is the major) when compared to another version
+// Finds the first minor release (which in Deno is the major) when compared to another version
 const getFirstMajorRelease = ({ releasedVersions, versionToCompare }) =>
   releasedVersions.find(
     releasedVersion =>
@@ -287,7 +287,7 @@ const VersionSelector = ({ showDiff, showReleaseCandidates }) => {
     <Fragment>
       <Selectors>
         <FromVersionSelector
-          title="What's your current React Native version?"
+          title="What's your current Deno version?"
           loading={isLoading}
           value={localFromVersion}
           options={fromVersionList}
@@ -300,11 +300,11 @@ const VersionSelector = ({ showDiff, showReleaseCandidates }) => {
           value={localToVersion}
           options={toVersionList}
           popover={
-            localToVersion === '0.60.1' && (
+            localToVersion === '0.37.1' && (
               <Popover
                 visible={true}
                 placement="topLeft"
-                content="We recommend using the latest 0.60 patch release instead of 0.60.1."
+                content="We recommend using the latest 0.37 patch release instead of 0.37.1."
               />
             )
           }

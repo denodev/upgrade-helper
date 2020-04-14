@@ -13,10 +13,9 @@ export const AppNameWarning = () => (
     <Alert
       message={
         <Markdown>
-          Keep in mind that `RnDiffApp` and `rndiffapp` are placeholders. When
-          upgrading, you should replace them with your actual project's name.
-          You can also provide your app name by clicking the settings icon on
-          the top right.
+          Keep in mind that the patches are more than the actual project needs
+          to be modified, for example `function copyFile(from: string, to:
+          string)` to `function copyFile(fromPath: string, toPath: string)`.
         </Markdown>
       }
       type="info"

@@ -25,8 +25,7 @@ const DiffViewer = ({
   fromVersion,
   toVersion,
   selectedChanges,
-  onToggleChangeSelection,
-  appName
+  onToggleChangeSelection
 }) => {
   const [isLoading, setLoading] = useState(true)
   const [diff, setDiff] = useState(null)
@@ -122,7 +121,7 @@ const DiffViewer = ({
     return () => {
       clearTimeout(debounce)
     }
-  }, [appName, fromVersion, showDiff, toVersion])
+  }, [fromVersion, showDiff, toVersion])
 
   if (!showDiff) {
     return null
@@ -166,7 +165,6 @@ const DiffViewer = ({
         {...diffSectionProps}
         isDoneSection={false}
         diffViewStyle={diffViewStyle}
-        appName={appName}
       />
 
       {renderUpgradeDoneMessage({ diff, completedDiffs })}
@@ -175,7 +173,6 @@ const DiffViewer = ({
         {...diffSectionProps}
         isDoneSection={true}
         title="Done"
-        appName={appName}
         doneTitleRef={doneTitleRef}
       />
 

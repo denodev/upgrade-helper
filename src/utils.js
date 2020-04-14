@@ -1,33 +1,15 @@
 import semver from 'semver/preload'
 import versions from './releases'
 
-const RN_DIFF_REPO = 'react-native-community/rn-diff-purge'
-const DEFAULT_APP_NAME = 'RnDiffApp'
+const DENO_API_DIFF_REPO = 'denodev/deno_api_diff_clean'
 
-export const RELEASES_URL = `https://raw.githubusercontent.com/${RN_DIFF_REPO}/master/RELEASES`
+export const RELEASES_URL = `https://raw.githubusercontent.com/${DENO_API_DIFF_REPO}/master/RELEASES`
 
 export const getDiffPatchURL = ({ fromVersion, toVersion }) =>
-  `https://raw.githubusercontent.com/${RN_DIFF_REPO}/diffs/diffs/${fromVersion}..${toVersion}.diff`
+  `https://raw.githubusercontent.com/${DENO_API_DIFF_REPO}/diffs/diffs/${fromVersion}...${toVersion}.diff`
 
-// `path` must contain `RnDiffApp` prefix
 export const getBinaryFileURL = ({ version, path }) =>
-  `https://github.com/${RN_DIFF_REPO}/raw/release/${version}/${path}`
-
-export const removeAppPathPrefix = (path, appName) =>
-  path.replace(new RegExp(`${appName || DEFAULT_APP_NAME}/`), '')
-
-export const getPathWithProvidedAppName = (path, appName) => {
-  if (!appName) {
-    return path
-  }
-
-  return path
-    .replace(new RegExp(DEFAULT_APP_NAME, 'g'), appName)
-    .replace(
-      new RegExp(DEFAULT_APP_NAME.toLowerCase(), 'g'),
-      appName.toLowerCase()
-    )
-}
+  `https://github.com/${DENO_API_DIFF_REPO}/raw/${version}/${path}`
 
 export const getVersionsInDiff = ({ fromVersion, toVersion }) => {
   const cleanedToVersion = semver.valid(semver.coerce(toVersion))
@@ -44,7 +26,7 @@ export const getVersionsInDiff = ({ fromVersion, toVersion }) => {
 }
 
 const baseChangelogURL =
-  'https://github.com/react-native-community/releases/blob/master/CHANGELOG.md'
+  'https://github.com/denoland/deno/blob/master/Releases.md'
 export const getChangelogURL = ({ version }) =>
   `${baseChangelogURL}#v${version.replace('.', '')}0`
 

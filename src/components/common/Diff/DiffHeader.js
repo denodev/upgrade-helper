@@ -3,17 +3,12 @@ import styled from '@emotion/styled'
 import { Tag, Button, Popover } from 'antd'
 import {
   CheckOutlined,
-  DownloadOutlined,
   DownOutlined,
   RightOutlined,
   CopyOutlined,
   RollbackOutlined
 } from '@ant-design/icons'
-import {
-  removeAppPathPrefix,
-  getBinaryFileURL,
-  getPathWithProvidedAppName
-} from '../../../utils'
+import { getBinaryFileURL } from '../../../utils'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const Wrapper = styled.div`
@@ -37,17 +32,7 @@ const FileRenameArrow = styled(RightOutlined)({
   color: '#f78206'
 })
 
-const getFilePathsToShow = ({ oldPath, newPath, appName }) => {
-  const oldPathSanitized = getPathWithProvidedAppName(oldPath, appName)
-  const newPathSanitized = getPathWithProvidedAppName(newPath, appName)
-
-  return {
-    oldPath: removeAppPathPrefix(oldPathSanitized, appName),
-    newPath: removeAppPathPrefix(newPathSanitized, appName)
-  }
-}
-
-const FileName = ({ oldPath, newPath, type, appName }) => {
+const FileName = ({ oldPath, newPath, type }) => {
   if (type === 'delete') {
     return <span>{oldPath}</span>
   }
@@ -91,27 +76,6 @@ const BinaryBadge = ({ visible, ...props }) =>
       BINARY
     </Tag>
   ) : null
-
-const DownloadFileButton = styled(({ visible, version, path, ...props }) =>
-  visible ? (
-    <Button
-      {...props}
-      type="ghost"
-      shape="circle"
-      icon={<DownloadOutlined />}
-      target="_blank"
-      href={getBinaryFileURL({ version, path })}
-    />
-  ) : null
-)`
-  color: #24292e;
-  font-size: 12px;
-  border-width: 0;
-  &:hover,
-  &:focus {
-    color: #24292e;
-  }
-`
 
 const ViewFileButton = styled(({ visible, version, path, ...props }) =>
   visible ? (
@@ -236,10 +200,9 @@ const DiffHeader = ({
   onCopyPathToClipboard,
   copyPathPopoverContent,
   resetCopyPathPopoverContent,
-  appName,
   ...props
 }) => {
-  const sanitizedFilePaths = getFilePathsToShow({ oldPath, newPath, appName })
+  const sanitizedFilePaths = { oldPath, newPath }
 
   return (
     <Wrapper {...props}>
@@ -255,7 +218,6 @@ const DiffHeader = ({
             oldPath={sanitizedFilePaths.oldPath}
             newPath={sanitizedFilePaths.newPath}
             type={type}
-            appName={appName}
           />{' '}
           <FileStatus type={type} />
           <BinaryBadge visible={!hasDiff} />
@@ -273,11 +235,6 @@ const DiffHeader = ({
         <Fragment>
           <ViewFileButton
             visible={hasDiff && type !== 'delete'}
-            version={toVersion}
-            path={newPath}
-          />
-          <DownloadFileButton
-            visible={!hasDiff && type !== 'delete'}
             version={toVersion}
             path={newPath}
           />

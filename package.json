@@ -1,7 +1,8 @@
 {
   "name": "upgrade-helper",
-  "version": "0.1.0",
-  "homepage": "https://react-native-community.github.io/upgrade-helper",
+  "private": true,
+  "version": "0.0.0",
+  "homepage": "https://deno.dev/upgrade-helper",
   "license": "MIT",
   "dependencies": {
     "@ant-design/icons": "4.0.3",

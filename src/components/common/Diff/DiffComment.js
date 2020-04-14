@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { Button } from 'antd'
 import { CloseOutlined, MessageOutlined } from '@ant-design/icons'
-import { removeAppPathPrefix, getVersionsInDiff } from '../../../utils'
+import { getVersionsInDiff } from '../../../utils'
 import Markdown from '../Markdown'
 
 const CommentContainer = styled.div`
@@ -37,20 +37,18 @@ const LINE_CHANGE_TYPES = {
 const getLineNumberWithType = ({ lineChangeType, lineNumber }) =>
   `${LINE_CHANGE_TYPES[lineChangeType.toUpperCase()]}${lineNumber}`
 
-const getComments = ({ newPath, fromVersion, toVersion, appName }) => {
-  const newPathSanitized = removeAppPathPrefix(newPath, appName)
-
+const getComments = ({ newPath, fromVersion, toVersion }) => {
   const versionsInDiff = getVersionsInDiff({ fromVersion, toVersion }).filter(
     ({ comments }) =>
       comments &&
       comments.length > 0 &&
-      comments.some(({ fileName }) => fileName === newPathSanitized)
+      comments.some(({ fileName }) => fileName === newPath)
   )
 
   return versionsInDiff.reduce((allComments, version) => {
     const comments = version.comments.reduce(
       (versionComments, { fileName, lineChangeType, lineNumber, content }) => {
-        if (fileName !== newPathSanitized) {
+        if (fileName !== newPath) {
           return versionComments
         }
 

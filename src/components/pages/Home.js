@@ -56,11 +56,10 @@ const Home = () => {
   const [settings, setSettings] = useState({
     [`${SHOW_LATEST_RCS}`]: false
   })
-  const [appName, setAppName] = useState('')
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
-      ReactGA.initialize('UA-136307971-1')
+      ReactGA.initialize('UA-123999279-2')
       ReactGA.pageview('/')
     }
   }, [])
@@ -89,29 +88,25 @@ const Home = () => {
       <Container>
         <TitleContainer>
           <LogoImg
-            alt="React Native upgrade helper logo"
-            title="React Native upgrade helper logo"
+            alt="Deno upgrade helper logo"
+            title="Deno upgrade helper logo"
             src={logo}
           />
 
           <a href={homepage}>
-            <TitleHeader>React Native upgrade helper</TitleHeader>
+            <TitleHeader>Deno upgrade helper</TitleHeader>
           </a>
 
           <StarButton
-            href="https://github.com/react-native-community/upgrade-helper"
+            href="https://github.com/denodev/upgrade-helper"
             data-icon="octicon-star"
             data-show-count="true"
-            aria-label="Star react-native-community/upgrade-helper on GitHub"
+            aria-label="Star denodev/upgrade-helper on GitHub"
           >
             Star
           </StarButton>
 
-          <Settings
-            handleSettingsChange={handleSettingsChange}
-            appName={appName}
-            setAppName={setAppName}
-          />
+          <Settings handleSettingsChange={handleSettingsChange} />
         </TitleContainer>
 
         <VersionSelector
@@ -124,7 +119,6 @@ const Home = () => {
         showDiff={showDiff}
         fromVersion={fromVersion}
         toVersion={toVersion}
-        appName={appName}
       />
     </Page>
   )

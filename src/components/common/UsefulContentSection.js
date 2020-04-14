@@ -114,7 +114,7 @@ class UsefulContentSection extends Component {
             const links = [
               ...usefulContent.links,
               {
-                title: `React Native ${versionWithoutEndingZero} changelog`,
+                title: `Deno ${versionWithoutEndingZero} changelog`,
                 url: getChangelogURL({ version: versionWithoutEndingZero })
               }
             ]

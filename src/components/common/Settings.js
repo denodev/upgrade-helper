@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
 import { SettingOutlined } from '@ant-design/icons'
-import { Popover, Button, Checkbox, Input } from 'antd'
+import { Popover, Button, Checkbox } from 'antd'
 import { SHOW_LATEST_RCS } from '../../utils'
-import styled from '@emotion/styled'
 
-const InputContainer = styled.div({
-  marginTop: '16px'
-})
-const Settings = ({ handleSettingsChange, appName, setAppName }) => {
+const Settings = ({ handleSettingsChange }) => {
   const [popoverVisibility, setVisibility] = useState(false)
 
   const handleClickChange = visibility => setVisibility(visibility)
@@ -25,16 +21,6 @@ const Settings = ({ handleSettingsChange, appName, setAppName }) => {
               <Checkbox value={SHOW_LATEST_RCS}>{SHOW_LATEST_RCS}</Checkbox>
             </div>
           </Checkbox.Group>
-          <InputContainer>
-            <h4>What's your app name?</h4>
-            <Input
-              value={appName}
-              onChange={e => {
-                setAppName(e.target.value)
-              }}
-              placeholder="MyAwesomeApp"
-            />
-          </InputContainer>
         </>
       }
       trigger="click"

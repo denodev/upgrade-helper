@@ -1,6 +1,6 @@
 {
-  "short_name": "Upgrade RN apps",
-  "name": "Upgrade your React Native Apps",
+  "short_name": "Upgrade Deno apps",
+  "name": "Upgrade your Deno Apps",
   "icons": [
     {
       "src": "favicon.ico",

@@ -72,8 +72,10 @@ const DiffView = styled(RDiff)`
 `
 
 // Diff will be collapsed by default if the file has been deleted or has more than 5 hunks
-const isDiffCollapsedByDefault = ({ type, hunks }) =>
-  type === 'delete' || hunks.length > 5 ? true : undefined
+// const isDiffCollapsedByDefault = ({ type, hunks }) =>
+//   type === 'delete' || hunks.length > 5 ? true : undefined
+
+const isDiffCollapsedByDefault = ({ type, hunks }) => undefined
 
 const Diff = ({
   oldPath,
@@ -89,8 +91,7 @@ const Diff = ({
   onToggleChangeSelection,
   areAllCollapsed,
   setAllCollapsed,
-  diffViewStyle,
-  appName
+  diffViewStyle
 }) => {
   const [isDiffCollapsed, setIsDiffCollapsed] = useState(
     isDiffCollapsedByDefault({ type, hunks })
@@ -142,7 +143,6 @@ const Diff = ({
         copyPathPopoverContent={copyPathPopoverContent}
         resetCopyPathPopoverContent={handleResetCopyPathPopoverContent}
         onCompleteDiff={onCompleteDiff}
-        appName={appName}
       />
 
       {!isDiffCollapsed && (
@@ -150,7 +150,7 @@ const Diff = ({
           viewType={diffViewStyle}
           diffType={type}
           hunks={hunks}
-          widgets={getComments({ newPath, fromVersion, toVersion, appName })}
+          widgets={getComments({ newPath, fromVersion, toVersion })}
           optimizeSelection={true}
           selectedChanges={selectedChanges}
         >

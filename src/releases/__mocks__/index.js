@@ -1,4 +1,4 @@
-const fixtureVersions = ['0.59', '0.58', '0.57', '0.56']
+const fixtureVersions = ['0.37', '0.36']
 
 jest.setMock(
   '../index.js',
